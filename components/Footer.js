@@ -15,7 +15,7 @@ export default function Footer() {
         <Icon
           name="home" // FontAwesome home icon
           size={24}
-          color={activeTab === 'Home' ? '#f97316' : '#888'} // Change color based on active state
+          color={activeTab === 'Home' ? '#00A8E8' : '#888'} // Change color based on active state
         />
         <Text style={[styles.footerLabel, activeTab === 'Home' && styles.activeLabel]}>
           Home
@@ -30,7 +30,7 @@ export default function Footer() {
         <Icon
           name="search" // FontAwesome search icon
           size={24}
-          color={activeTab === 'Search' ? '#f97316' : '#888'}
+          color={activeTab === 'Search' ? '#00A8E8' : '#888'}
         />
         <Text style={[styles.footerLabel, activeTab === 'Search' && styles.activeLabel]}>
           Search
@@ -45,7 +45,7 @@ export default function Footer() {
         <Icon
           name="heart" // FontAwesome heart icon
           size={24}
-          color={activeTab === 'Favorites' ? '#f97316' : '#888'}
+          color={activeTab === 'Favorites' ? '#00A8E8' : '#888'}
         />
         <Text style={[styles.footerLabel, activeTab === 'Favorites' && styles.activeLabel]}>
           Favorites
@@ -60,7 +60,7 @@ export default function Footer() {
         <Icon
           name="envelope" // FontAwesome envelope icon
           size={24}
-          color={activeTab === 'Inbox' ? '#f97316' : '#888'}
+          color={activeTab === 'Inbox' ? '#00A8E8' : '#888'}
         />
         <Text style={[styles.footerLabel, activeTab === 'Inbox' && styles.activeLabel]}>
           Inbox
@@ -75,7 +75,7 @@ export default function Footer() {
         <Icon
           name="user" // FontAwesome user icon
           size={24}
-          color={activeTab === 'Account' ? '#f97316' : '#888'}
+          color={activeTab === 'Account' ? '#00A8E8' : '#888'}
         />
         <Text style={[styles.footerLabel, activeTab === 'Account' && styles.activeLabel]}>
           Account
@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   activeLabel: {
-    color: '#f97316', // Active label color
+    color: '#00A8E8', // Active label color
   },
 });

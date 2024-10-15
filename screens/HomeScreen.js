@@ -1,33 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import Footer from '../components/Footer'; // Import the Footer component
+import axios from 'axios';
+import Footer from '../components/Footer';
 
-const categories = [
-  { id: '1', name: 'Electronics', icon: require('../assets/img/mobile.png') },
-  { id: '2', name: 'Fashion', icon: require('../assets/img/shoes.png') },
-  { id: '3', name: 'Beauty', icon: require('../assets/img/lipstick.png') },
-  { id: '4', name: 'Fresh Food', icon: require('../assets/img/traibo.png') },
-];
+export default function HomeScreen({ navigation }) {
+  const [categories, setCategories] = useState([]);
+  const [deals, setDeals] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
+  const redBoxImages = [
+    require('../assets/img/handbag_rec.jpg'),
+    require('../assets/img/ipad.png'),
+  ];
 
-const deals = [
-  { id: '1', name: 'Shoes', discount: '50%', image: require('../assets/img/jordan.png') },
-];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const categoriesResponse = await axios.get('http://localhost:3000/categoriesOfHome');
+        const dealsResponse = await axios.get('http://localhost:3000/deals');
+        const recommendationsResponse = await axios.get('http://localhost:3000/recommendations');
 
-const recommendations = [
-  { id: '1', name: 'Shoes', price: '$299', rating: 4.5, image: require('../assets/img/shoes1.png') },
-  { id: '2', name: 'Tablet', price: '$499', rating: 4.5, image: require('../assets/img/ipad.png') },
-  { id: '3', name: 'Pear', price: '$2', rating: 4.5, image: require('../assets/img/traibo.png') },
-];
+        setCategories(categoriesResponse.data);
+        setDeals(dealsResponse.data);
+        setRecommendations(recommendationsResponse.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-const redBoxImages = [
-  require('../assets/img/handbag_rec.jpg'),
-  require('../assets/img/ipad.png'),
-];
+    fetchData();
+  }, []);
 
-export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView style={{ width: "100%", height: 500 }}>
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>All Deals</Text>
@@ -36,10 +41,7 @@ export default function HomeScreen() {
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <TextInput
-            placeholder="Search for product"
-            style={styles.searchInput}
-          />
+          <TextInput placeholder="Search for product" style={styles.searchInput} />
         </View>
 
         {/* Categories */}
@@ -49,9 +51,12 @@ export default function HomeScreen() {
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.categoryContainer}>
+            <TouchableOpacity 
+              style={styles.categoryContainer} 
+              onPress={() => { if (item.name === 'Electronics') navigation.navigate('Electronics'); }}
+            >
               <View style={styles.circleContainer}>
-                <Image source={item.icon} style={styles.categoryIcon} resizeMode="contain" />
+                <Image source={{ uri: item.icon }} style={styles.categoryIcon} resizeMode="contain" />
               </View>
               <Text style={styles.categoryText}>{item.name}</Text>
             </TouchableOpacity>
@@ -71,13 +76,12 @@ export default function HomeScreen() {
                     <Text style={styles.buyNowText}>Buy now</Text>
                   </TouchableOpacity>
                 </View>
-                <Image source={deal.image} style={styles.dealImage} />
+                <Image source={{ uri: deal.image }} style={styles.dealImage} />
               </View>
             </View>
           ))}
         </View>
 
-        {/* Red Boxes */}
         <View style={styles.redContainer}>
           {redBoxImages.map((image, index) => (
             <View key={index} style={styles.redBox}>
@@ -99,7 +103,7 @@ export default function HomeScreen() {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <View style={styles.recommendationItem}>
-                <Image source={item.image} style={styles.recommendationImage} />
+                <Image source={{ uri: item.image }} style={styles.recommendationImage} />
                 <Text style={styles.recommendationTitle}>{item.name}</Text>
                 <Text>{item.price}</Text>
                 <Text>{`Rating: ${item.rating}`}</Text>
@@ -119,9 +123,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  scrollContainer: {
-    flex: 1,
+    padding: 12,
   },
   header: {
     padding: 16,
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   searchContainer: {
-    marginHorizontal: 36,
+    marginHorizontal: 16,
     marginVertical: 10,
   },
   searchInput: {
@@ -151,11 +153,11 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   categoryList: {
-    marginHorizontal: 26,
+    marginHorizontal: 6,
   },
   categoryContainer: {
     alignItems: 'center',
-    marginHorizontal: 12,
+    marginHorizontal: 10  ,
   },
   circleContainer: {
     width: 70,
@@ -175,7 +177,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   dealsContainer: {
-    marginHorizontal: 16,
     marginVertical: 10,
   },
   dealItem: {
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
   redContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 36,
+    marginHorizontal: 20,
     marginVertical: 0,
   },
   redBox: {
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   recommendationsContainer: {
-    marginHorizontal: 36,
+    marginHorizontal: 22,
     marginVertical: 36,
   },
   recommendationsHeader: {

@@ -1,0 +1,30 @@
+{
+    "categoriesOfHome": [
+      { "id": "1", "name": "Electronics", "icon": "./assets/img/mobile.png" },
+      { "id": "2", "name": "Fashion", "icon": "./assets/img/shoes.png" },
+      { "id": "3", "name": "Beauty", "icon": "./assets/img/lipstick.png" },
+      { "id": "4", "name": "Fresh Food", "icon": "./assets/img/traibo.png" }
+    ],
+    "deals": [
+      { "id": "1", "name": "Shoes", "discount": "50%", "image": "./assets/img/jordan.png" }
+    ],
+    "recommendations": [
+      { "id": "1", "name": "Shoes", "price": "$299", "rating": 4.5, "image": "./assets/img/shoes1.png" },
+      { "id": "2", "name": "Tablet", "price": "$499", "rating": 4.5, "image": "./assets/img/ipad.png" },
+      { "id": "3", "name": "Pear", "price": "$2", "rating": 4.5, "image": "./assets/img/traibo.png" }
+    ],
+    "categoriesOfElectronic": [
+      { "id": "1", "icon": "./assets/Data/smart.png" },
+      { "id": "2", "icon": "./assets/Data/ipad.png" },
+      { "id": "3", "icon": "./assets/Data/macbook.png" }
+    ],
+    "productsOfElectronics": [
+      { "id": "1", "name": "Smartphone", "price": "$899", "rating": 4, "image": "./assets/Data/1.png" },
+      { "id": "2", "name": "Smartphone", "price": "$899", "rating": 4, "image": "./assets/Data/2.png" },
+      { "id": "3", "name": "Smartphone", "price": "$789", "rating": 4, "image": "./assets/Data/3.png" },
+      { "id": "4", "name": "Smartphone", "price": "$999", "rating": 4, "image": "./assets/Data/4.png" },
+      { "id": "5", "name": "Smartphone", "price": "$999", "rating": 4, "image": "./assets/Data/4.png" },
+      { "id": "6", "name": "Smartphone", "price": "$999", "rating": 4, "image": "./assets/Data/4.png" }
+    ]
+  }
+  
